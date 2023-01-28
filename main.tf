@@ -25,7 +25,7 @@ data "digitalocean_ssh_key" "ssh_name" {
   name = var.ssh_key_name
 }
 
-resource "digitalocean_kubernetes_cluster" "k8so" {
+resource "digitalocean_kubernetes_cluster" "k8s" {
   name   = "k8s"
   region = var.region
   # Grab the latest version slug from `doctl kubernetes options versions`
@@ -55,6 +55,6 @@ output "jenkins_ip" {
 }
 
 resource "local_file" "kube_config" {
-  content  = digitalocean_kubernetes_cluster.k8so.kube_config.0.raw_config
+  content  = digitalocean_kubernetes_cluster.k8s.kube_config.0.raw_config
   filename = "kube_config.yaml"
 }
